@@ -16,6 +16,7 @@ const startBtn = document.getElementById('start-btn');
 startBtn.addEventListener('click', () => {
     document.querySelector('.hero').classList.add('hide');
 });
+//Denna ska in i eventlyssnaren ovan
 fetchData();
 
 
@@ -26,31 +27,42 @@ async function fetchData() {
     products.forEach(product => {
         renderProduct(product);
     });
+
+    openOverlay(products[0]);
 }
 
 
 function renderProduct(product) {
     let articleEl = document.createElement('article');
+    articleEl.classList.add(product.name.toLowerCase());
+
     let imgEl = document.createElement('img');
     imgEl.setAttribute('src', `../img/${product.img}`);
     articleEl.appendChild(imgEl);
-    mainEl.appendChild(articleEl);
-    articleEl = setProductInfo(product, articleEl);
-    console.log(articleEl);
-
-    articleEl.addEventListener('click', () => {
-        console.log(1);
-    });
-}
-
-
-function setProductInfo(product, card) {
-    let productInfo = document.createElement('section');
-    productInfo.classList.add('hide');
 
     let productDesc = document.createElement('p');
     productDesc.innerHTML = product.desc;
-    productInfo.appendChild(productDesc)
+    articleEl.appendChild(productDesc);
+    
+    let productInfo = setProductInfo(product, true);
+    articleEl.appendChild(productInfo);
+    
+    // articleEl.addEventListener('click', () => {
+    //     if (articleEl.querySelector('.hide')) {
+    //         articleEl.querySelector('.hide').classList.remove('hide');
+    //     } else {
+    //         articleEl.querySelector('section').classList.add('hide');
+    //     }
+    // });
+
+    mainEl.appendChild(articleEl);
+}
+
+
+function setProductInfo(product, withBuyBtn) {
+
+    let productInfo = document.createElement('section');
+    // productInfo.classList.add('hide');
 
     let characteristicsEl = document.createElement('ul');
     let characteristicsKeys = Object.keys(product.characteristics);
@@ -63,9 +75,41 @@ function setProductInfo(product, card) {
         liEl.innerHTML = `${characteristicsKeys[i]} ${characteristicsValues[i]}`;
         characteristicsEl.appendChild(liEl);
     }
-
     productInfo.appendChild(characteristicsEl);
-    card.appendChild(productInfo);
 
-    return card;
+    if (withBuyBtn) {
+        let buyBtn = document.createElement('button');
+        buyBtn.classList.add('buy-btn');
+        buyBtn.innerHTML = `Buy for ${product.pricePerHekto}kr/hg!`;
+    
+        buyBtn.addEventListener('click', () => {
+            // openOverlay();
+        })
+        productInfo.appendChild(buyBtn)
+    }
+
+
+    return productInfo;
+}
+
+function openOverlay(product) {
+    let overlay = document.createElement('section');
+    overlay.classList.add('overlay');
+
+    let articleEl = document.createElement('article');
+    
+    let input = document.createElement('input');
+    input.setAttribute('id', `${product.name}`);
+    articleEl.appendChild(input);
+
+    let productInfo = setProductInfo(product, false);
+
+    articleEl.appendChild(productInfo);
+    
+    product.weight = input.value;
+    console.log(product.weight);
+    
+    overlay.appendChild(articleEl)
+    document.querySelector('body').appendChild(overlay);
+    
 }
