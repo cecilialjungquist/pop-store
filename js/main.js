@@ -1,5 +1,6 @@
 // TO DO
 // Mobilanpassa sidan
+// Om man refreshar sidan ska den cart indicator ändå synas om vrukorgen inte är tom
 // Man ska kunna klicka på carten när innehållet visas, då ska varukorgen försvinna igen
 // Om varukorgen är tom ska inte knappen visas
 // Om produkten redan finns i korgen ska den inte läggas till igen, bara ändra amount
@@ -7,16 +8,10 @@
 
 import {renderProduct} from "./product_functions.js";
 
-let localStorageCart = JSON.parse(localStorage.getItem('cart'));
 const startBtn = document.getElementById('start-btn');
-let cartIndicator = document.querySelector('.cart-indicator');
-
-// Om localStorage finns, ska indikatorn synas
-if (localStorageCart) {
-    cartIndicator.style.opacity = '.8';
-}
 
 function updateLocalStorage(product) {
+    let localStorageCart = JSON.parse(localStorage.getItem('cart'));
     // Om localStorage finns, hämta och uppdatera
     if (localStorageCart) {
         localStorageCart.push(product)
