@@ -9,6 +9,8 @@
 import {renderProduct} from "./product_functions.js";
 
 const startBtn = document.getElementById('start-btn');
+// Hämtar data (i bakgrunden) direkt
+fetchData();
 
 function updateLocalStorage(product) {
     let localStorageCart = JSON.parse(localStorage.getItem('cart'));
@@ -42,8 +44,8 @@ async function fetchData() {
 }
 
 startBtn.addEventListener('click', () => {
+    document.querySelector('main').classList.remove('hide');
     document.querySelector('.hero').classList.add('hide');
-    fetchData();
 });
 
 export { updateLocalStorage };
