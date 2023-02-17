@@ -29,7 +29,7 @@ h1, h2, h3 {
 }
 
 h1 {
-    font-size: 6rem;
+    font-size: 5rem;
 }
 
 h4 {
@@ -79,7 +79,6 @@ main {
     gap: 3rem;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 4rem 0rem;
 }
 
 button {
@@ -87,7 +86,6 @@ button {
     border: none;
     padding: .4rem 1.6rem;
     border-radius: 8px;
-    /* background-color: #B4FF7A; */
     background-image: linear-gradient(45deg, #efffded2, #B4FF7A);
     color: #242424;
     font-family: 'Cairo', sans-serif;
@@ -157,7 +155,6 @@ nav .cart-indicator {
 
 .hero {
     width: 100%;
-    min-height: 85vh;
     display: flex;
     flex-direction: column;
     align-items: center;
