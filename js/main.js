@@ -1,6 +1,8 @@
+// TO DO
 // Mobilanpassa sidan
 // Man ska kunna klicka på carten när innehållet visas, då ska varukorgen försvinna igen
 // Om varukorgen är tom ska inte knappen visas
+// Om produkten redan finns i korgen ska den inte läggas till igen, bara ändra amount
 // REFAKTORISERA 
 
 import {renderProduct} from "./product_functions.js";
@@ -27,12 +29,21 @@ function updateLocalStorage(product) {
 }
 
 async function fetchData() {
-    let products = await fetch('js/products.json');
-    products = await products.json();
-    
-    products.forEach(product => {
-        renderProduct(product);
-    });
+    try {
+        let products = await fetch('js/products.json');
+        products = await products.json();
+        
+        products.forEach(product => {
+            renderProduct(product);
+        });
+        
+    } catch (error) {
+        console.log('Oppps, something went wrong! ', error);
+        let message = document.createElement('p');
+        message.innerHTML = `Ooops, something went wrong. Please try again later!`;
+        message.style.marginTop = '10rem';
+        document.querySelector('main').appendChild(message);
+    }
 }
 
 startBtn.addEventListener('click', () => {
