@@ -7,7 +7,7 @@ function renderProduct(product) {
     let productDesc = document.createElement('p');
     let productInfo = setProductInfo(product, true);
 
-    imgEl.setAttribute('src', `/img/${product.img}`);
+    imgEl.setAttribute('src', `./img/${product.img}`);
     articleEl.classList.add(product.name.toLowerCase());
     mainEl.style.padding = '6rem 0rem';
     
