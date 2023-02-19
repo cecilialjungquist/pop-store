@@ -20,7 +20,7 @@ cartIcon.addEventListener('click', () => {
 
 function renderCart() {
     let cartEl = document.createElement('article');
-    // let localStorageCart = JSON.parse(localStorage.getItem('cart'));
+    let localStorageCart = JSON.parse(localStorage.getItem('cart'));
     let paymentBtn = document.createElement('button');
     
     cartEl.classList.add('products-in-cart');
