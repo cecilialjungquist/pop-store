@@ -13,7 +13,7 @@ const startBtn = document.getElementById('start-btn');
 fetchData();
 
 function updateLocalStorage(product) {
-    let localStorageCart = JSON.parse(localStorage.getItem('cart'));
+    let localStorageCart = checkLocalStorage();
     // Om localStorage finns, hämta och uppdatera
     if (localStorageCart) {
         localStorageCart.push(product)
@@ -22,6 +22,15 @@ function updateLocalStorage(product) {
         // Annars skapa den med ny product
         let newLocalStorageCart = [product];
         localStorage.setItem('cart', JSON.stringify(newLocalStorageCart));
+    }
+}
+
+function checkLocalStorage() {
+    let localStorageCart = JSON.parse(localStorage.getItem('cart'));
+    if (localStorageCart) {
+        return localStorageCart;
+    } else {
+        return false;
     }
 }
 
@@ -48,4 +57,4 @@ startBtn.addEventListener('click', () => {
     document.querySelector('.hero').classList.add('hide');
 });
 
-export { updateLocalStorage };
+export { updateLocalStorage, checkLocalStorage };

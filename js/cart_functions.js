@@ -1,4 +1,4 @@
-import { updateLocalStorage } from "./main.js";
+import { updateLocalStorage, checkLocalStorage } from "./main.js";
 
 let cartIcon = document.querySelector('.cart-icon');
 let cartIndicator = document.querySelector('.cart-indicator');
@@ -20,7 +20,7 @@ cartIcon.addEventListener('click', () => {
 
 function renderCart() {
     let cartEl = document.createElement('article');
-    let localStorageCart = JSON.parse(localStorage.getItem('cart'));
+    let localStorageCart = checkLocalStorage();
     let paymentBtn = document.createElement('button');
     
     cartEl.classList.add('products-in-cart');
