@@ -1,11 +1,26 @@
-import { updateLocalStorage } from "./main.js";
+import { updateLocalStorage, checkLocalStorage } from "./main.js";
 
 let cartIcon = document.querySelector('.cart-icon');
 let cartIndicator = document.querySelector('.cart-indicator');
+let isOpen = false; 
 
 cartIcon.addEventListener('click', () => {
+    // Om den redan är öppnad
+    if (isOpen) {
+        isOpen = false;
+        // Ta bort elementet från UI
+        document.querySelector('.products-in-cart').remove();
+    } else {
+        isOpen = true;
+        // Annars rendera ut cart i UI
+        renderCart();
+    }
+
+});
+
+function renderCart() {
     let cartEl = document.createElement('article');
-    let localStorageCart = JSON.parse(localStorage.getItem('cart'));
+    let localStorageCart = checkLocalStorage();
     let paymentBtn = document.createElement('button');
     
     cartEl.classList.add('products-in-cart');
@@ -21,18 +36,22 @@ cartIcon.addEventListener('click', () => {
             `;
             cartEl.appendChild(cartProductInfo);
         });
+        paymentBtn.addEventListener('click', () => {
+            isOpen = false;
+            localStorage.clear();
+            document.querySelector('body').removeChild(cartEl);
+            // Raderar indikator
+            cartIndicator.style.opacity = '0';
+        })
+        cartEl.appendChild(paymentBtn);
+    } else {
+        let message = document.createElement('p');
+        message.innerHTML = `Nothing to pop here...`;
+        cartEl.appendChild(message);
     }
-
-    paymentBtn.addEventListener('click', () => {
-        localStorage.clear();
-        document.querySelector('body').removeChild(cartEl);
-        // Raderar indikator
-        cartIndicator.style.opacity = '0';
-    })
     
-    cartEl.appendChild(paymentBtn);
     document.querySelector('body').appendChild(cartEl);
-});
+}
 
 function addToCart(product, amount) {
     // Adderar indikator

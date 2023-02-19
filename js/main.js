@@ -1,19 +1,19 @@
 // TO DO
-// Mobilanpassa sidan
-// Om man refreshar sidan ska den cart indicator ändå synas om vrukorgen inte är tom
-// Man ska kunna klicka på carten när innehållet visas, då ska varukorgen försvinna igen
-// Om varukorgen är tom ska inte knappen visas
 // Om produkten redan finns i korgen ska den inte läggas till igen, bara ändra amount
 // REFAKTORISERA 
 
 import {renderProduct} from "./product_functions.js";
 
 const startBtn = document.getElementById('start-btn');
+let cartIndicator = document.querySelector('.cart-indicator');
+
 // Hämtar data (i bakgrunden) direkt
 fetchData();
+// Kollar localStorage
+checkLocalStorage();
 
 function updateLocalStorage(product) {
-    let localStorageCart = JSON.parse(localStorage.getItem('cart'));
+    let localStorageCart = checkLocalStorage();
     // Om localStorage finns, hämta och uppdatera
     if (localStorageCart) {
         localStorageCart.push(product)
@@ -22,6 +22,17 @@ function updateLocalStorage(product) {
         // Annars skapa den med ny product
         let newLocalStorageCart = [product];
         localStorage.setItem('cart', JSON.stringify(newLocalStorageCart));
+    }
+}
+
+function checkLocalStorage() {
+    let localStorageCart = JSON.parse(localStorage.getItem('cart'));
+    if (localStorageCart) {
+        let cartIndicator = document.querySelector('.cart-indicator');
+        cartIndicator.style.opacity = '.8';
+        return localStorageCart;
+    } else {
+        return false;
     }
 }
 
@@ -48,4 +59,4 @@ startBtn.addEventListener('click', () => {
     document.querySelector('.hero').classList.add('hide');
 });
 
-export { updateLocalStorage };
+export { updateLocalStorage, checkLocalStorage };
