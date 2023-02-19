@@ -1,5 +1,15 @@
 import addToCart from "./cart_functions.js";
 
+function checkLocalStorage() {
+    let localStorageCart = JSON.parse(localStorage.getItem('cart'));
+
+    if (localStorageCart) {
+        return localStorageCart;
+    } else {
+        return false;
+    }
+}
+
 function renderProduct(product) {
     const mainEl = document.querySelector('main');
     let articleEl = document.createElement('article');
@@ -107,4 +117,4 @@ function updateAmount(amount, operator) {
     return amount;
 }
 
-export {renderProduct, setProductInfo};
+export {renderProduct, setProductInfo, checkLocalStorage};
