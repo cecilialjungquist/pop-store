@@ -107,4 +107,4 @@ function updateAmount(amount, operator) {
     return amount;
 }
 
-export {renderProduct, setProductInfo, updateAmount};
+export {renderProduct, setProductInfo};
