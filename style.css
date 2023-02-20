@@ -229,6 +229,11 @@ nav .cart-indicator {
     text-align: center;
 }
 
+.remove-product {
+    padding-right: .6rem; 
+    letter-spacing: 0;
+}
+
 .plus, .minus {
     background-color: transparent;
     background-image: none;
