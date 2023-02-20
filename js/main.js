@@ -1,5 +1,7 @@
 // TO DO
 // Om produkten redan finns i korgen ska den inte läggas till igen, bara ändra amount
+// Close when clicking outside på pop-upen
+// Kunna ta bort från varukorgen
 // REFAKTORISERA 
 
 import {renderProduct} from "./product_functions.js";

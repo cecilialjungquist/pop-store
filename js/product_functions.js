@@ -94,7 +94,14 @@ function openOverlay(product) {
 
     addToCartBtn.addEventListener('click', () => {
         addToCart(product, amount);
-        document.querySelector('body').removeChild(overlay);
+        overlay.remove();
+    });
+
+    document.addEventListener('click', (event) => {
+        // Tar bort overlay om man klickar på overlay
+        if (event.target.contains(overlay)) {
+            overlay.remove();
+        }
     })
 }
 
