@@ -1,5 +1,7 @@
 # POPstore
 
+## Övningsuppgift för att hantera API:er och json-filer.
+
 ## Bakgrund
 Det finns 1000-tals sorter majs som alla lämpar sig mer eller mindre bra att göra popcorn av. Startupen POP har gjort detta till en affärsidé och har sållat fram 20 riktiga guldkorn ( pun intended ) som blir vid tillredning blir otroligt goda popcorn.
 
